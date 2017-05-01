@@ -7,23 +7,40 @@
 //
 
 #import "ViewController.h"
+@import MapKit;
+
+static const CLLocationDegrees kLatitudeCF = 47.618217;
+static const CLLocationDegrees klongitudeCF = -122.351832;
 
 @interface ViewController ()
+
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIButton *currentLocationButton;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [self requestPermission];
+    self.mapView.showsUserLocation = YES;
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)requestPermission
+{
+    self.locationManager = [[CLLocationManager alloc] init];
+    [self.locationManager requestAlwaysAuthorization];
 }
 
+- (IBAction)currentLocationButtonPressed:(id)sender
+{
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(kLatitudeCF, klongitudeCF);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 500.0, 500.0);
+    [self.mapView setRegion:region animated:YES];
+
+}
 
 @end
