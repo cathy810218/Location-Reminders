@@ -13,7 +13,27 @@
 		6B06A6551EB7AC3400170FF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B06A6531EB7AC3400170FF9 /* Main.storyboard */; };
 		6B06A6571EB7AC3400170FF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B06A6561EB7AC3400170FF9 /* Assets.xcassets */; };
 		6B06A65A1EB7AC3500170FF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B06A6581EB7AC3500170FF9 /* LaunchScreen.storyboard */; };
+		6B06A6641EB7C4EE00170FF9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B06A6631EB7C4EE00170FF9 /* MapKit.framework */; };
+		6B06A6671EB7F62A00170FF9 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B06A6651EB7F62A00170FF9 /* Bolts.framework */; };
+		6B06A6681EB7F62A00170FF9 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B06A6661EB7F62A00170FF9 /* Parse.framework */; };
+		6B06A6691EB7F63F00170FF9 /* Bolts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6B06A6651EB7F62A00170FF9 /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6B06A66A1EB7F63F00170FF9 /* Parse.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6B06A6661EB7F62A00170FF9 /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6B06A66D1EB7FA7300170FF9 /* Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A66C1EB7FA7300170FF9 /* Keys.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6B06A6611EB7B2FC00170FF9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6B06A6691EB7F63F00170FF9 /* Bolts.framework in CopyFiles */,
+				6B06A66A1EB7F63F00170FF9 /* Parse.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6B06A6471EB7AC3400170FF9 /* LocationReminders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationReminders.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,6 +46,11 @@
 		6B06A6561EB7AC3400170FF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B06A6591EB7AC3500170FF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6B06A65B1EB7AC3500170FF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B06A6631EB7C4EE00170FF9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6B06A6651EB7F62A00170FF9 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
+		6B06A6661EB7F62A00170FF9 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Carthage/Build/iOS/Parse.framework; sourceTree = "<group>"; };
+		6B06A66B1EB7FA7300170FF9 /* Keys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keys.h; sourceTree = "<group>"; };
+		6B06A66C1EB7FA7300170FF9 /* Keys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keys.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B06A6671EB7F62A00170FF9 /* Bolts.framework in Frameworks */,
+				6B06A6681EB7F62A00170FF9 /* Parse.framework in Frameworks */,
+				6B06A6641EB7C4EE00170FF9 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +72,7 @@
 			children = (
 				6B06A6491EB7AC3400170FF9 /* LocationReminders */,
 				6B06A6481EB7AC3400170FF9 /* Products */,
+				6B06A6621EB7C4EE00170FF9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +91,8 @@
 				6B06A64E1EB7AC3400170FF9 /* AppDelegate.m */,
 				6B06A6501EB7AC3400170FF9 /* ViewController.h */,
 				6B06A6511EB7AC3400170FF9 /* ViewController.m */,
+				6B06A66B1EB7FA7300170FF9 /* Keys.h */,
+				6B06A66C1EB7FA7300170FF9 /* Keys.m */,
 				6B06A6531EB7AC3400170FF9 /* Main.storyboard */,
 				6B06A6561EB7AC3400170FF9 /* Assets.xcassets */,
 				6B06A6581EB7AC3500170FF9 /* LaunchScreen.storyboard */,
@@ -79,6 +110,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6B06A6621EB7C4EE00170FF9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6B06A6651EB7F62A00170FF9 /* Bolts.framework */,
+				6B06A6661EB7F62A00170FF9 /* Parse.framework */,
+				6B06A6631EB7C4EE00170FF9 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,6 +130,7 @@
 				6B06A6431EB7AC3400170FF9 /* Sources */,
 				6B06A6441EB7AC3400170FF9 /* Frameworks */,
 				6B06A6451EB7AC3400170FF9 /* Resources */,
+				6B06A6611EB7B2FC00170FF9 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -112,6 +154,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 597HR9EHGW;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -152,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B06A6521EB7AC3400170FF9 /* ViewController.m in Sources */,
+				6B06A66D1EB7FA7300170FF9 /* Keys.m in Sources */,
 				6B06A64F1EB7AC3400170FF9 /* AppDelegate.m in Sources */,
 				6B06A64C1EB7AC3400170FF9 /* main.m in Sources */,
 			);
@@ -276,6 +324,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 597HR9EHGW;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = LocationReminders/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cathyoun.LocationReminders;
@@ -288,6 +340,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 597HR9EHGW;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = LocationReminders/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cathyoun.LocationReminders;
