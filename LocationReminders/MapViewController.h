@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MapViewController.h
 //  LocationReminders
 //
 //  Created by Cathy Oun on 5/1/17.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface MapViewController : UIViewController
 
 
 @end
