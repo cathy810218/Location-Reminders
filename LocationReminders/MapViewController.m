@@ -9,14 +9,14 @@
 #import "MapViewController.h"
 #import "LocationCoordinates.h"
 #import "AddReminderViewController.h"
+#import "LocationController.h"
 @import MapKit;
 
-@interface MapViewController () <MKMapViewDelegate>
+@interface MapViewController () <MKMapViewDelegate, LocationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *currentLocationButton;
-@property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) MKPointAnnotation *selectedAnnotation;
+@property (strong, nonatomic) LocationController *locationController;
 @end
 
 @implementation MapViewController
@@ -24,10 +24,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self requestPermission];
     self.mapView.showsUserLocation = YES; // Drop a pin initially at user location
     self.mapView.delegate = self;
-//    self.mapView.region = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 100, 100);
+    [LocationController shared].delegate = self;
+
     
     UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     [self.mapView addGestureRecognizer:gesture];
@@ -68,16 +68,16 @@
     [self.mapView selectAnnotation:pointAnnotation animated:YES];
 }
 
-- (void)requestPermission
-{
-    self.locationManager = [[CLLocationManager alloc] init];
-    [self.locationManager requestAlwaysAuthorization];
-}
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"AddReminderViewController"]) {
+    [super prepareForSegue:segue sender:sender];
+    if ([segue.identifier isEqualToString:@"AddReminderViewController"]
+        && [sender isKindOfClass:[MKAnnotationView class]]) {
+        
+        MKAnnotationView *view = (MKAnnotationView *)sender;
         AddReminderViewController *addReminderVC = [segue destinationViewController];
-        addReminderVC.selectedAnnotation  = self.selectedAnnotation;
+        addReminderVC.selectedAnnotation  = view.annotation;
     }
 }
 
@@ -116,10 +116,16 @@
 - (IBAction)currentLocationButtonPressed:(id)sender
 {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(kLatitudeCF, kLongitudeCF);
-    [self dropPinWithCoordinate:coordinate];
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 500.0, 500.0);
     [self.mapView setRegion:region animated:YES];
 
+}
+
+#pragma mark - LocationControllerDelegate
+-(void)locationControllerUpdatedLocation:(CLLocation *)location
+{
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.coordinate, 500, 500);
+    [self.mapView setRegion:region animated:YES];
 }
 
 #pragma mark - MKMapViewDelegate
@@ -138,8 +144,8 @@
     if (!pinView) {
         pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Annotation"];
     }
-    pinView.draggable = YES;
-    pinView.animatesDrop = YES;
+    pinView.draggable      = YES;
+    pinView.animatesDrop   = YES;
     pinView.canShowCallout = YES; // This has to be set to show right call out
     pinView.rightCalloutAccessoryView = addButton;
     return pinView;
@@ -156,7 +162,6 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    self.selectedAnnotation = view.annotation;
     [self performSegueWithIdentifier:@"AddReminderViewController" sender:view];
 }
 

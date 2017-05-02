@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSLog(@"%@",self.selectedAnnotation.title);
+    NSLog(@"%f %f",self.selectedAnnotation.coordinate.latitude, self.selectedAnnotation.coordinate.longitude);
 }
 
 - (void)didReceiveMemoryWarning {
