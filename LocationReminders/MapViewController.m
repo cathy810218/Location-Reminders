@@ -9,7 +9,6 @@
 #import "MapViewController.h"
 #import "LocationCoordinates.h"
 #import "AddReminderViewController.h"
-
 @import MapKit;
 
 @interface MapViewController () <MKMapViewDelegate>
@@ -28,6 +27,8 @@
     [self requestPermission];
     self.mapView.showsUserLocation = YES; // Drop a pin initially at user location
     self.mapView.delegate = self;
+//    self.mapView.region = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 100, 100);
+    
     UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     [self.mapView addGestureRecognizer:gesture];
 }
@@ -48,11 +49,23 @@
 
 - (void)dropPinWithCoordinate:(CLLocationCoordinate2D)coordinate
 {
-    MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
-    pointAnnotation.coordinate = coordinate;
-    pointAnnotation.title = @"Monitor Location";
+    MKPointAnnotation *pointAnnotation;
     
-    [self.mapView addAnnotation:pointAnnotation];
+    BOOL hasAnnotation = NO;
+    for (MKPointAnnotation *a in self.mapView.annotations) {
+        if ((a.coordinate.latitude == coordinate.latitude) && (a.coordinate.longitude == coordinate.longitude)) {
+            pointAnnotation = a;
+            hasAnnotation = YES;
+            break;
+        }
+    }
+    if (!hasAnnotation) {
+        pointAnnotation = [[MKPointAnnotation alloc] init];
+        pointAnnotation.coordinate = coordinate;
+        pointAnnotation.title = @"Monitor Location";
+        [self.mapView addAnnotation:pointAnnotation];
+    }
+    [self.mapView selectAnnotation:pointAnnotation animated:YES];
 }
 
 - (void)requestPermission
@@ -68,16 +81,34 @@
     }
 }
 
+- (IBAction)mapSegment:(UISegmentedControl *)sender {
+    switch (sender.selectedSegmentIndex){
+        case 0:
+            [self.mapView setMapType:MKMapTypeStandard];
+            break;
+        case 1:
+            [self.mapView setMapType:MKMapTypeHybrid];
+            break;
+        case 2:
+            [self.mapView setMapType:MKMapTypeSatellite];
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - Buttons Action
 
 - (IBAction)parisButtonPressed:(id)sender {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(kLatitudeParis, kLongitudeParis);
+    [self dropPinWithCoordinate:coordinate];
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 500.0, 500.0);
     [self.mapView setRegion:region animated:YES];
 }
 
 - (IBAction)taipeiButtonPressed:(id)sender {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(kLatitudeTaipei, kLongitudeTaipei);
+    [self dropPinWithCoordinate:coordinate];
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 500.0, 500.0);
     [self.mapView setRegion:region animated:YES];
 }
@@ -85,6 +116,7 @@
 - (IBAction)currentLocationButtonPressed:(id)sender
 {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(kLatitudeCF, kLongitudeCF);
+    [self dropPinWithCoordinate:coordinate];
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 500.0, 500.0);
     [self.mapView setRegion:region animated:YES];
 
@@ -93,11 +125,16 @@
 #pragma mark - MKMapViewDelegate
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
-    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
+//    CustomAnnotationView *customView = (CustomAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Annotation"];
+//    if (!customView) {
+//        customView = [[CustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Annotation"];
+//    }
     MKPinAnnotationView *pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Annotation"];
     pinView.annotation = annotation;
-    
+    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
     if (!pinView) {
         pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Annotation"];
     }
@@ -124,3 +161,14 @@
 }
 
 @end
+
+// MKAnnotation is a protocol you need to adopt if you wish to show your object on a MKMapView.
+// The coordinate property tells MKMapView where to place it. title and subtitle properties are optional
+// but if you wish to show a callout view you are expected to implement title at a minimum.
+//
+// MKAnnotationView visually presents the MKAnnotation on the MKMapView.
+// The image property can be set to determine what to show for the annotation.
+// However you can subclass it and implement drawRect: yourself.
+//
+// MKPinAnnotationView is a subclass of MKAnnotationView that uses a Pin graphic as the image property.
+// You can set the pin color and drop animation.

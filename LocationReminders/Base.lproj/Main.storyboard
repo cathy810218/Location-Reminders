@@ -27,38 +27,60 @@
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DiP-C0-M9W">
                                 <rect key="frame" x="161" y="601" width="52" height="30"/>
-                                <state key="normal" title="Current"/>
+                                <state key="normal" title="Current">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="currentLocationButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ehe-ym-tqv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6X-dB-MoG">
-                                <rect key="frame" x="56" y="601" width="41" height="30"/>
-                                <state key="normal" title="Taipei"/>
-                                <connections>
-                                    <action selector="taipeiButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XRG-Zp-X2t"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovr-Dq-nSG">
                                 <rect key="frame" x="284.5" y="601" width="34" height="30"/>
-                                <state key="normal" title="Paris"/>
+                                <state key="normal" title="Paris">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="parisButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NAo-Gj-twC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6X-dB-MoG">
+                                <rect key="frame" x="56" y="601" width="41" height="30"/>
+                                <state key="normal" title="Taipei">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="taipeiButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XRG-Zp-X2t"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nkQ-AA-FNz">
+                                <rect key="frame" x="56" y="51.5" width="263" height="29"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <segments>
+                                    <segment title="Standard"/>
+                                    <segment title="Hybrid"/>
+                                    <segment title="Satellite"/>
+                                </segments>
+                                <color key="tintColor" red="0.34827950499999999" green="0.36032320350000002" blue="0.36118051550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="mapSegment:" destination="BYZ-38-t0r" eventType="valueChanged" id="IAv-cy-aQ5"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.65490196079999996" green="0.67450980390000004" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="SxX-TY-D2d" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.7" id="9EV-hf-Url"/>
                             <constraint firstItem="p6X-dB-MoG" firstAttribute="centerY" secondItem="DiP-C0-M9W" secondAttribute="centerY" id="B7b-Qm-YKr"/>
                             <constraint firstItem="DiP-C0-M9W" firstAttribute="top" secondItem="SxX-TY-D2d" secondAttribute="bottom" constant="34.5" id="FbT-c5-Up0"/>
                             <constraint firstItem="SxX-TY-D2d" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="PbA-58-dtO"/>
                             <constraint firstItem="ovr-Dq-nSG" firstAttribute="trailing" secondItem="SxX-TY-D2d" secondAttribute="trailing" id="TBf-NW-EYD"/>
+                            <constraint firstItem="nkQ-AA-FNz" firstAttribute="width" secondItem="SxX-TY-D2d" secondAttribute="width" id="YH1-vC-9DW"/>
                             <constraint firstItem="SxX-TY-D2d" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.7" id="Zqh-of-Yth"/>
+                            <constraint firstItem="SxX-TY-D2d" firstAttribute="top" secondItem="nkQ-AA-FNz" secondAttribute="bottom" constant="20" id="kWQ-LR-XIO"/>
                             <constraint firstItem="p6X-dB-MoG" firstAttribute="leading" secondItem="SxX-TY-D2d" secondAttribute="leading" id="l8D-rX-SgQ"/>
                             <constraint firstItem="DiP-C0-M9W" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lcg-Wp-tww"/>
                             <constraint firstItem="SxX-TY-D2d" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="o9D-ht-17u"/>
                             <constraint firstItem="ovr-Dq-nSG" firstAttribute="centerY" secondItem="DiP-C0-M9W" secondAttribute="centerY" id="xIg-aP-rPB"/>
+                            <constraint firstItem="nkQ-AA-FNz" firstAttribute="centerX" secondItem="SxX-TY-D2d" secondAttribute="centerX" id="ygN-hF-ImX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -69,6 +91,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="24.800000000000001" y="36.431784107946029"/>
         </scene>
         <!--Add Reminder View Controller-->
         <scene sceneID="vKH-xf-DyF">
@@ -111,6 +134,9 @@
                                 <rect key="frame" x="170" y="409" width="34" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="0yE-HR-rdv" eventType="touchUpInside" id="lXO-Mb-BVj"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reminder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JuM-ef-a1C">
                                 <rect key="frame" x="40" y="96" width="73" height="21"/>

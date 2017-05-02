@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		6B06A64C1EB7AC3400170FF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A64B1EB7AC3400170FF9 /* main.m */; };
 		6B06A64F1EB7AC3400170FF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A64E1EB7AC3400170FF9 /* AppDelegate.m */; };
-		6B06A6521EB7AC3400170FF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A6511EB7AC3400170FF9 /* ViewController.m */; };
+		6B06A6521EB7AC3400170FF9 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A6511EB7AC3400170FF9 /* MapViewController.m */; };
 		6B06A6551EB7AC3400170FF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B06A6531EB7AC3400170FF9 /* Main.storyboard */; };
 		6B06A6571EB7AC3400170FF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B06A6561EB7AC3400170FF9 /* Assets.xcassets */; };
 		6B06A65A1EB7AC3500170FF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B06A6581EB7AC3500170FF9 /* LaunchScreen.storyboard */; };
@@ -19,6 +19,9 @@
 		6B06A6691EB7F63F00170FF9 /* Bolts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6B06A6651EB7F62A00170FF9 /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6B06A66A1EB7F63F00170FF9 /* Parse.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6B06A6661EB7F62A00170FF9 /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6B06A66D1EB7FA7300170FF9 /* Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A66C1EB7FA7300170FF9 /* Keys.m */; };
+		6B06A6731EB87AAB00170FF9 /* AddReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A6721EB87AAB00170FF9 /* AddReminderViewController.m */; };
+		6B06A6761EB87B7E00170FF9 /* LocationCoordinates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A6751EB87B7E00170FF9 /* LocationCoordinates.m */; };
+		6B06A6791EB891A800170FF9 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A6781EB891A800170FF9 /* CustomAnnotationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,8 +43,8 @@
 		6B06A64B1EB7AC3400170FF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B06A64D1EB7AC3400170FF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6B06A64E1EB7AC3400170FF9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6B06A6501EB7AC3400170FF9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6B06A6511EB7AC3400170FF9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6B06A6501EB7AC3400170FF9 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		6B06A6511EB7AC3400170FF9 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		6B06A6541EB7AC3400170FF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6B06A6561EB7AC3400170FF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B06A6591EB7AC3500170FF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +54,12 @@
 		6B06A6661EB7F62A00170FF9 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Carthage/Build/iOS/Parse.framework; sourceTree = "<group>"; };
 		6B06A66B1EB7FA7300170FF9 /* Keys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keys.h; sourceTree = "<group>"; };
 		6B06A66C1EB7FA7300170FF9 /* Keys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keys.m; sourceTree = "<group>"; };
+		6B06A6711EB87AAB00170FF9 /* AddReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddReminderViewController.h; sourceTree = "<group>"; };
+		6B06A6721EB87AAB00170FF9 /* AddReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddReminderViewController.m; sourceTree = "<group>"; };
+		6B06A6741EB87B7E00170FF9 /* LocationCoordinates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationCoordinates.h; sourceTree = "<group>"; };
+		6B06A6751EB87B7E00170FF9 /* LocationCoordinates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationCoordinates.m; sourceTree = "<group>"; };
+		6B06A6771EB891A800170FF9 /* CustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
+		6B06A6781EB891A800170FF9 /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,10 +98,16 @@
 			children = (
 				6B06A64D1EB7AC3400170FF9 /* AppDelegate.h */,
 				6B06A64E1EB7AC3400170FF9 /* AppDelegate.m */,
-				6B06A6501EB7AC3400170FF9 /* ViewController.h */,
-				6B06A6511EB7AC3400170FF9 /* ViewController.m */,
+				6B06A6501EB7AC3400170FF9 /* MapViewController.h */,
+				6B06A6511EB7AC3400170FF9 /* MapViewController.m */,
+				6B06A6711EB87AAB00170FF9 /* AddReminderViewController.h */,
+				6B06A6721EB87AAB00170FF9 /* AddReminderViewController.m */,
+				6B06A6771EB891A800170FF9 /* CustomAnnotationView.h */,
+				6B06A6781EB891A800170FF9 /* CustomAnnotationView.m */,
 				6B06A66B1EB7FA7300170FF9 /* Keys.h */,
 				6B06A66C1EB7FA7300170FF9 /* Keys.m */,
+				6B06A6741EB87B7E00170FF9 /* LocationCoordinates.h */,
+				6B06A6751EB87B7E00170FF9 /* LocationCoordinates.m */,
 				6B06A6531EB7AC3400170FF9 /* Main.storyboard */,
 				6B06A6561EB7AC3400170FF9 /* Assets.xcassets */,
 				6B06A6581EB7AC3500170FF9 /* LaunchScreen.storyboard */,
@@ -198,8 +213,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B06A6521EB7AC3400170FF9 /* ViewController.m in Sources */,
+				6B06A6761EB87B7E00170FF9 /* LocationCoordinates.m in Sources */,
+				6B06A6731EB87AAB00170FF9 /* AddReminderViewController.m in Sources */,
+				6B06A6521EB7AC3400170FF9 /* MapViewController.m in Sources */,
 				6B06A66D1EB7FA7300170FF9 /* Keys.m in Sources */,
+				6B06A6791EB891A800170FF9 /* CustomAnnotationView.m in Sources */,
 				6B06A64F1EB7AC3400170FF9 /* AppDelegate.m in Sources */,
 				6B06A64C1EB7AC3400170FF9 /* main.m in Sources */,
 			);
@@ -370,6 +388,7 @@
 				6B06A6601EB7AC3500170FF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
