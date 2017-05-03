@@ -23,6 +23,7 @@
 		6B06A6761EB87B7E00170FF9 /* LocationCoordinates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A6751EB87B7E00170FF9 /* LocationCoordinates.m */; };
 		6B06A6791EB891A800170FF9 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A6781EB891A800170FF9 /* CustomAnnotationView.m */; };
 		6B1D2FD81EB9107000262F35 /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1D2FD71EB9107000262F35 /* LocationController.m */; };
+		6B1D2FDB1EB976B400262F35 /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1D2FDA1EB976B400262F35 /* Reminder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +64,8 @@
 		6B06A6781EB891A800170FF9 /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
 		6B1D2FD61EB9107000262F35 /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationController.h; sourceTree = "<group>"; };
 		6B1D2FD71EB9107000262F35 /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
+		6B1D2FD91EB976B400262F35 /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
+		6B1D2FDA1EB976B400262F35 /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,14 +108,16 @@
 				6B06A6511EB7AC3400170FF9 /* MapViewController.m */,
 				6B06A6711EB87AAB00170FF9 /* AddReminderViewController.h */,
 				6B06A6721EB87AAB00170FF9 /* AddReminderViewController.m */,
-				6B06A6771EB891A800170FF9 /* CustomAnnotationView.h */,
-				6B06A6781EB891A800170FF9 /* CustomAnnotationView.m */,
+				6B1D2FD91EB976B400262F35 /* Reminder.h */,
+				6B1D2FDA1EB976B400262F35 /* Reminder.m */,
 				6B1D2FD61EB9107000262F35 /* LocationController.h */,
 				6B1D2FD71EB9107000262F35 /* LocationController.m */,
 				6B06A66B1EB7FA7300170FF9 /* Keys.h */,
 				6B06A66C1EB7FA7300170FF9 /* Keys.m */,
 				6B06A6741EB87B7E00170FF9 /* LocationCoordinates.h */,
 				6B06A6751EB87B7E00170FF9 /* LocationCoordinates.m */,
+				6B06A6771EB891A800170FF9 /* CustomAnnotationView.h */,
+				6B06A6781EB891A800170FF9 /* CustomAnnotationView.m */,
 				6B06A6531EB7AC3400170FF9 /* Main.storyboard */,
 				6B06A6561EB7AC3400170FF9 /* Assets.xcassets */,
 				6B06A6581EB7AC3500170FF9 /* LaunchScreen.storyboard */,
@@ -222,6 +227,7 @@
 				6B06A6731EB87AAB00170FF9 /* AddReminderViewController.m in Sources */,
 				6B06A6521EB7AC3400170FF9 /* MapViewController.m in Sources */,
 				6B06A66D1EB7FA7300170FF9 /* Keys.m in Sources */,
+				6B1D2FDB1EB976B400262F35 /* Reminder.m in Sources */,
 				6B1D2FD81EB9107000262F35 /* LocationController.m in Sources */,
 				6B06A6791EB891A800170FF9 /* CustomAnnotationView.m in Sources */,
 				6B06A64F1EB7AC3400170FF9 /* AppDelegate.m in Sources */,

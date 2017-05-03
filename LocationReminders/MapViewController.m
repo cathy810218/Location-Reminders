@@ -24,10 +24,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.mapView.showsUserLocation = YES; // Drop a pin initially at user location
+    self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
     [LocationController shared].delegate = self;
-
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:nil];
     
     UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     [self.mapView addGestureRecognizer:gesture];
@@ -81,6 +81,7 @@
     }
 }
 
+#pragma mark - UISegmentedControl
 - (IBAction)mapSegment:(UISegmentedControl *)sender {
     switch (sender.selectedSegmentIndex){
         case 0:
@@ -98,7 +99,6 @@
 }
 
 #pragma mark - Buttons Action
-
 - (IBAction)parisButtonPressed:(id)sender {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(kLatitudeParis, kLongitudeParis);
     [self dropPinWithCoordinate:coordinate];
@@ -134,10 +134,6 @@
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         return nil;
     }
-//    CustomAnnotationView *customView = (CustomAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Annotation"];
-//    if (!customView) {
-//        customView = [[CustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Annotation"];
-//    }
     MKPinAnnotationView *pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Annotation"];
     pinView.annotation = annotation;
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
