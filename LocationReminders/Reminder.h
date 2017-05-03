@@ -11,6 +11,7 @@
 
 @interface Reminder : PFObject <PFSubclassing>
 
+// We didn't get setter and getter for free because of PFObject
 @property (strong, nonatomic) NSString *locationName;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (assign, nonatomic) NSNumber *radius;

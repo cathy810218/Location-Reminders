@@ -11,6 +11,9 @@
 
 @interface AddReminderViewController : UIViewController
 
+typedef void(^AddReminderCompletion)(MKCircle *);
+
 @property (strong, nonatomic) MKPointAnnotation *selectedAnnotation;
+@property (strong, nonatomic) AddReminderCompletion completion;
 
 @end

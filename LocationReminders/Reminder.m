@@ -10,22 +10,23 @@
 
 @implementation Reminder
 
--(instancetype)initWithLocationName:(NSString *)locationName geoPoint:(PFGeoPoint *)geoPoint radius:(NSNumber *)radius withUser:(PFUser *)user
+// Complier trusts me that the accessors will be available at runtime
+@dynamic locationName;
+@dynamic geoPoint;
+@dynamic radius;
+@dynamic user;
+
+// Need to register the subclass could also do it in AppDelegate
+// But it's better do it inside the model class
++ (void)load
 {
-    self = [super init];
-    if (self) {
-        self.locationName = locationName;
-        self.geoPoint = geoPoint;
-        self.radius = radius;
-        self.user = user;
-        
-    }
-    return self;
+    [super load];
+    [self registerSubclass]; // Register the subclass with Parse
 }
 
 + (NSString *)parseClassName
 {
-    return @"LocationReminders";
+    return @"Reminder"; // Name on the Parse dashboard
 }
 
 @end

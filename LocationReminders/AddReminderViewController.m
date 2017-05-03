@@ -8,10 +8,11 @@
 
 #import "AddReminderViewController.h"
 #import "Reminder.h"
+#import <ParseUI/ParseUI.h>
 
 static const int kInitial_Radius = 250;
 
-@interface AddReminderViewController () 
+@interface AddReminderViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextfield;
@@ -26,9 +27,7 @@ static const int kInitial_Radius = 250;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"%@",self.selectedAnnotation.title);
-    NSLog(@"%f %f",self.selectedAnnotation.coordinate.latitude, self.selectedAnnotation.coordinate.longitude);
-
+    
     [self setupNavigationItems];
     [self setupSlider];
     [self login];
@@ -53,20 +52,35 @@ static const int kInitial_Radius = 250;
 - (void)login
 {
     if (![PFUser currentUser]) {
-        //TODO: Log in
+        PFLogInViewController *loginVC = [[PFLogInViewController alloc] init];
+        loginVC.delegate = self;
+        loginVC.signUpController.delegate = self;
+        [loginVC setFields:PFLogInFieldsFacebook | PFLogInFieldsTwitter | PFLogInFieldsDefault];
+
+        [self presentViewController:loginVC animated:true completion:nil];
     }
 }
 
 - (void)handleSaveButton:(UIBarButtonItem *)sender
 {
-    //TODO: Add to the list
-    [self showAlert];
+    Reminder *newReminder = [Reminder object];
+    newReminder.locationName = self.selectedAnnotation.title;
+    newReminder.geoPoint = [PFGeoPoint geoPointWithLatitude:self.selectedAnnotation.coordinate.latitude longitude:self.selectedAnnotation.coordinate.longitude];
+    [newReminder saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        NSLog(@"%@",self.selectedAnnotation.title);
+        NSLog(@"%f %f",self.selectedAnnotation.coordinate.latitude, self.selectedAnnotation.coordinate.longitude);
+        if (succeeded) {
+            [self showAlertWithTitle:@"Succeed" andMessage:[NSString stringWithFormat:@"you have added \"\%@\" to your reminder list", self.nameTextfield.text]];
+        } else {
+            [self showAlertWithTitle:@"Error" andMessage:@"Something is wrong!"];
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
 }
 
-- (void)showAlert
+- (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message
 {
-    // ui alert controller
-    UIAlertController* addReminderAlert = [UIAlertController alertControllerWithTitle:@"Success" message:[NSString stringWithFormat:@"you have added \"\%@\" to your reminder list", self.nameTextfield.text] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController* addReminderAlert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self.navigationController popToRootViewControllerAnimated:true];
@@ -80,4 +94,14 @@ static const int kInitial_Radius = 250;
     self.radiusLabel.text = [NSString stringWithFormat:@"%@", radius];
 }
 
+#pragma mark - PFLogInViewControllerDelegate
+-(void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

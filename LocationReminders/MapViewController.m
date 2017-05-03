@@ -10,6 +10,7 @@
 #import "LocationCoordinates.h"
 #import "AddReminderViewController.h"
 #import "LocationController.h"
+#import "NotificationKeys.h"
 @import MapKit;
 
 @interface MapViewController () <MKMapViewDelegate, LocationControllerDelegate>
@@ -31,6 +32,13 @@
     
     UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     [self.mapView addGestureRecognizer:gesture];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reminderSavedToParse:) name:kSavedReminderNotificationKey object:nil];
+}
+
+- (void)reminderSavedToParse:(id)sender
+{
+    NSLog(@"HI");
 }
 
 - (void)handleLongPress:(UIGestureRecognizer *)gesture
@@ -38,7 +46,6 @@
     if (gesture.state == UIGestureRecognizerStateBegan) {
         // get the touch point on the map
         CGPoint point = [gesture locationInView:self.mapView];
-        
         // conver it to coordinates
         CLLocationCoordinate2D locationCoordinate = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
         
@@ -77,8 +84,21 @@
         
         MKAnnotationView *view = (MKAnnotationView *)sender;
         AddReminderViewController *addReminderVC = [segue destinationViewController];
+        
+        
         addReminderVC.selectedAnnotation  = view.annotation;
+        __weak __typeof__(self) weakSelf = self;
+        addReminderVC.completion = ^(MKCircle *circle) {
+            __strong typeof(weakSelf) hulk = weakSelf; //to prevent retain cycles
+            [hulk.mapView removeAnnotation:view.annotation];
+            [hulk.mapView addOverlay:circle];
+        };
     }
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kSavedReminderNotificationKey object:nil];
 }
 
 #pragma mark - UISegmentedControl
