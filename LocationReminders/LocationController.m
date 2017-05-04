@@ -8,6 +8,8 @@
 
 #import "LocationController.h"
 #import <CoreLocation/CoreLocation.h>
+@import UserNotifications;
+
 @interface LocationController () <CLLocationManagerDelegate>
 
 @end
@@ -56,6 +58,21 @@
 -(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
     NSLog(@"User did enter region: %@", region.identifier);
+    UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+    content.title = @"You're near!";
+    content.body = [NSString stringWithFormat:@"Enter region: %@", region.identifier];
+    content.sound = [UNNotificationSound defaultSound];
+    
+    UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:0.1 repeats:NO];
+    
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"Enter" content:content trigger:trigger];
+    UNUserNotificationCenter *current = [UNUserNotificationCenter currentNotificationCenter];
+    [current removeAllPendingNotificationRequests];
+    [current addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        }
+    }];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
@@ -72,6 +89,5 @@
 {
     [self.delegate locationControllerUpdatedLocation:locations.lastObject];
 }
-
 
 @end
