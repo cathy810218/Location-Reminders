@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "Keys.h"
+#import <UserNotifications/UserNotifications.h>
+#import <UserNotificationsUI/UserNotificationsUI.h>
 
 @import Parse;
 
@@ -19,6 +21,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self registerForNotification];
+    
     // Override point for customization after application launch.
     ParseClientConfiguration *parseConfig = [ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration>  _Nonnull configuration) {
         configuration.applicationId = kAppID;
@@ -27,10 +31,25 @@
     }];
     
     [Parse initializeWithConfiguration:parseConfig];
-
-    
     return YES;
 }
+
+
+
+- (void)registerForNotification
+{
+    UNAuthorizationOptions options = UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound;
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error occurd: %@", error.localizedDescription);
+        }
+        if (granted) {
+            NSLog(@"Permission.");
+        }
+    }];
+}
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

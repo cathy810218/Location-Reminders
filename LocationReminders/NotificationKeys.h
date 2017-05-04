@@ -11,5 +11,7 @@
 @interface NotificationKeys : NSObject
 
 extern NSString *const kSavedReminderNotificationKey;
+extern NSString *const kDidEnterRegionNotificationKey;
+
 
 @end

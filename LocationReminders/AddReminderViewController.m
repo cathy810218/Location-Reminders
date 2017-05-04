@@ -8,7 +8,9 @@
 
 #import "AddReminderViewController.h"
 #import "Reminder.h"
+#import "NotificationKeys.h"
 #import <ParseUI/ParseUI.h>
+#import "LocationController.h"
 
 static const int kInitial_Radius = 250;
 
@@ -26,8 +28,6 @@ static const int kInitial_Radius = 250;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
     [self setupNavigationItems];
     [self setupSlider];
     [self login];
@@ -64,18 +64,30 @@ static const int kInitial_Radius = 250;
 - (void)handleSaveButton:(UIBarButtonItem *)sender
 {
     Reminder *newReminder = [Reminder object];
-    newReminder.locationName = self.selectedAnnotation.title;
+    newReminder.locationName = self.nameTextfield.text;
     newReminder.geoPoint = [PFGeoPoint geoPointWithLatitude:self.selectedAnnotation.coordinate.latitude longitude:self.selectedAnnotation.coordinate.longitude];
     [newReminder saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         NSLog(@"%@",self.selectedAnnotation.title);
         NSLog(@"%f %f",self.selectedAnnotation.coordinate.latitude, self.selectedAnnotation.coordinate.longitude);
         if (succeeded) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSavedReminderNotificationKey object:nil];
+            
             [self showAlertWithTitle:@"Succeed" andMessage:[NSString stringWithFormat:@"you have added \"\%@\" to your reminder list", self.nameTextfield.text]];
         } else {
             [self showAlertWithTitle:@"Error" andMessage:@"Something is wrong!"];
             NSLog(@"%@", error.localizedDescription);
         }
     }];
+    
+    if (self.completion) {
+        CGFloat radius = self.slider.value;
+        MKCircle *circle = [MKCircle circleWithCenterCoordinate:self.selectedAnnotation.coordinate radius:radius];
+        if ([CLLocationManager isMonitoringAvailableForClass:[CLCircularRegion class]]) {
+            CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:self.selectedAnnotation.coordinate radius:radius identifier:newReminder.locationName];
+            [[LocationController shared] startMonitoringForRegion:region];
+        }
+        self.completion(circle, self.nameTextfield.text);
+    }
 }
 
 - (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message

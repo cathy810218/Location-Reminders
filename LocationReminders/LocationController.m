@@ -16,10 +16,8 @@
 
 + (instancetype)shared
 {
-    // We will need to nil out to avoid retain cycle
     static LocationController *shared = nil;
     
-    // Only execute one time!
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         shared = [[self alloc] init];
@@ -40,10 +38,34 @@
 {
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-    [self.locationManager requestAlwaysAuthorization];
     self.locationManager.distanceFilter = 100;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self.locationManager requestAlwaysAuthorization];
+}
+
+- (void)updateLocation
+{
     [self.locationManager startUpdatingLocation];
+}
+
+- (void)startMonitoringForRegion:(CLRegion *)region
+{
+    [self.locationManager startMonitoringForRegion:region];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
+{
+    NSLog(@"User did enter region: %@", region.identifier);
+}
+
+-(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
+{
+    NSLog(@"User did exit region: %@", region.identifier);
+}
+
+-(void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
+{
+    NSLog(@"User starts monitoring for region: %@", region.identifier);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations

@@ -11,6 +11,8 @@
 #import "AddReminderViewController.h"
 #import "LocationController.h"
 #import "NotificationKeys.h"
+#import <Parse/Parse.h>
+#import "Reminder.h"
 @import MapKit;
 
 @interface MapViewController () <MKMapViewDelegate, LocationControllerDelegate>
@@ -18,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *currentLocationButton;
 @property (strong, nonatomic) LocationController *locationController;
+@property (strong, nonatomic) MKPointAnnotation *annotationPin;
+
 @end
 
 @implementation MapViewController
@@ -28,6 +32,7 @@
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
     [LocationController shared].delegate = self;
+    [[LocationController shared] updateLocation];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:nil];
     
     UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
@@ -38,7 +43,12 @@
 
 - (void)reminderSavedToParse:(id)sender
 {
-    NSLog(@"HI");
+    PFQuery *query = [Reminder query];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        Reminder *object = [objects lastObject];
+        self.annotationPin.title = object.locationName;
+        
+    }];
 }
 
 - (void)handleLongPress:(UIGestureRecognizer *)gesture
@@ -52,6 +62,19 @@
         // drop the pin
         [self dropPinWithCoordinate:locationCoordinate];
     }
+}
+
+- (void)redrawAllPins
+{
+    PFQuery *query = [Reminder query];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        for (Reminder *reminder in objects) {
+            MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
+            
+            
+        }
+        
+    }];
 }
 
 - (void)dropPinWithCoordinate:(CLLocationCoordinate2D)coordinate
@@ -72,7 +95,8 @@
         pointAnnotation.title = @"Monitor Location";
         [self.mapView addAnnotation:pointAnnotation];
     }
-    [self.mapView selectAnnotation:pointAnnotation animated:YES];
+    self.annotationPin = pointAnnotation;
+    [self.mapView selectAnnotation:self.annotationPin animated:YES];
 }
 
 
@@ -85,13 +109,10 @@
         MKAnnotationView *view = (MKAnnotationView *)sender;
         AddReminderViewController *addReminderVC = [segue destinationViewController];
         
-        
         addReminderVC.selectedAnnotation  = view.annotation;
         __weak __typeof__(self) weakSelf = self;
-        addReminderVC.completion = ^(MKCircle *circle) {
-            __strong typeof(weakSelf) hulk = weakSelf; //to prevent retain cycles
-            [hulk.mapView removeAnnotation:view.annotation];
-            [hulk.mapView addOverlay:circle];
+        addReminderVC.completion = ^(MKCircle *circle, NSString *name) {
+            [weakSelf.mapView addOverlay:circle];
         };
     }
 }
@@ -135,7 +156,7 @@
 
 - (IBAction)currentLocationButtonPressed:(id)sender
 {
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(kLatitudeCF, kLongitudeCF);
+    CLLocationCoordinate2D coordinate = self.mapView.userLocation.coordinate;
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 500.0, 500.0);
     [self.mapView setRegion:region animated:YES];
 
@@ -167,18 +188,20 @@
     return pinView;
 }
 
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    self.annotationPin = view.annotation;
+    [self performSegueWithIdentifier:@"AddReminderViewController" sender:view];
+}
+
+
 -(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
 {
-    MKCircleRenderer *circleRender = [[MKCircleRenderer alloc] init];
+    MKCircleRenderer *circleRender = [[MKCircleRenderer alloc] initWithCircle:overlay];
     circleRender.fillColor = [UIColor redColor];
     circleRender.alpha = 0.3;
     
     return circleRender;
-}
-
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
-{
-    [self performSegueWithIdentifier:@"AddReminderViewController" sender:view];
 }
 
 @end

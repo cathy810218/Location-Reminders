@@ -11,5 +11,6 @@
 @implementation NotificationKeys
 
 NSString *const kSavedReminderNotificationKey = @"kSavedReminderNotificationKey";
+NSString *const kDidEnterRegionNotificationKey = @"kDidEnterRegionNotificationKey";
 
 @end
