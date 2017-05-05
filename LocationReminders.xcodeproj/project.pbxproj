@@ -22,6 +22,10 @@
 		6B06A6731EB87AAB00170FF9 /* AddReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A6721EB87AAB00170FF9 /* AddReminderViewController.m */; };
 		6B06A6761EB87B7E00170FF9 /* LocationCoordinates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A6751EB87B7E00170FF9 /* LocationCoordinates.m */; };
 		6B06A6791EB891A800170FF9 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A6781EB891A800170FF9 /* CustomAnnotationView.m */; };
+		6B1D2FD81EB9107000262F35 /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1D2FD71EB9107000262F35 /* LocationController.m */; };
+		6B1D2FDB1EB976B400262F35 /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1D2FDA1EB976B400262F35 /* Reminder.m */; };
+		6B1D2FED1EBA5AB800262F35 /* NotificationKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1D2FEC1EBA5AB800262F35 /* NotificationKeys.m */; };
+		6B1D2FEF1EBA5E5C00262F35 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B1D2FEE1EBA5E5C00262F35 /* ParseUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +64,13 @@
 		6B06A6751EB87B7E00170FF9 /* LocationCoordinates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationCoordinates.m; sourceTree = "<group>"; };
 		6B06A6771EB891A800170FF9 /* CustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
 		6B06A6781EB891A800170FF9 /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
+		6B1D2FD61EB9107000262F35 /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationController.h; sourceTree = "<group>"; };
+		6B1D2FD71EB9107000262F35 /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
+		6B1D2FD91EB976B400262F35 /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
+		6B1D2FDA1EB976B400262F35 /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
+		6B1D2FEB1EBA5AB800262F35 /* NotificationKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationKeys.h; sourceTree = "<group>"; };
+		6B1D2FEC1EBA5AB800262F35 /* NotificationKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationKeys.m; sourceTree = "<group>"; };
+		6B1D2FEE1EBA5E5C00262F35 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +80,7 @@
 			files = (
 				6B06A6671EB7F62A00170FF9 /* Bolts.framework in Frameworks */,
 				6B06A6681EB7F62A00170FF9 /* Parse.framework in Frameworks */,
+				6B1D2FEF1EBA5E5C00262F35 /* ParseUI.framework in Frameworks */,
 				6B06A6641EB7C4EE00170FF9 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,21 +108,11 @@
 		6B06A6491EB7AC3400170FF9 /* LocationReminders */ = {
 			isa = PBXGroup;
 			children = (
-				6B06A64D1EB7AC3400170FF9 /* AppDelegate.h */,
-				6B06A64E1EB7AC3400170FF9 /* AppDelegate.m */,
-				6B06A6501EB7AC3400170FF9 /* MapViewController.h */,
-				6B06A6511EB7AC3400170FF9 /* MapViewController.m */,
-				6B06A6711EB87AAB00170FF9 /* AddReminderViewController.h */,
-				6B06A6721EB87AAB00170FF9 /* AddReminderViewController.m */,
-				6B06A6771EB891A800170FF9 /* CustomAnnotationView.h */,
-				6B06A6781EB891A800170FF9 /* CustomAnnotationView.m */,
-				6B06A66B1EB7FA7300170FF9 /* Keys.h */,
-				6B06A66C1EB7FA7300170FF9 /* Keys.m */,
-				6B06A6741EB87B7E00170FF9 /* LocationCoordinates.h */,
-				6B06A6751EB87B7E00170FF9 /* LocationCoordinates.m */,
-				6B06A6531EB7AC3400170FF9 /* Main.storyboard */,
+				6B1D2FE71EB9CD4900262F35 /* Others */,
+				6B1D2FE61EB9CD3000262F35 /* Controller */,
+				6B1D2FE51EB9CD2C00262F35 /* View */,
+				6B1D2FE41EB9CD1E00262F35 /* Model */,
 				6B06A6561EB7AC3400170FF9 /* Assets.xcassets */,
-				6B06A6581EB7AC3500170FF9 /* LaunchScreen.storyboard */,
 				6B06A65B1EB7AC3500170FF9 /* Info.plist */,
 				6B06A64A1EB7AC3400170FF9 /* Supporting Files */,
 			);
@@ -128,11 +130,60 @@
 		6B06A6621EB7C4EE00170FF9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6B1D2FEE1EBA5E5C00262F35 /* ParseUI.framework */,
 				6B06A6651EB7F62A00170FF9 /* Bolts.framework */,
 				6B06A6661EB7F62A00170FF9 /* Parse.framework */,
 				6B06A6631EB7C4EE00170FF9 /* MapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6B1D2FE41EB9CD1E00262F35 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6B1D2FD91EB976B400262F35 /* Reminder.h */,
+				6B1D2FDA1EB976B400262F35 /* Reminder.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		6B1D2FE51EB9CD2C00262F35 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6B06A6771EB891A800170FF9 /* CustomAnnotationView.h */,
+				6B06A6781EB891A800170FF9 /* CustomAnnotationView.m */,
+				6B06A6531EB7AC3400170FF9 /* Main.storyboard */,
+				6B06A6581EB7AC3500170FF9 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		6B1D2FE61EB9CD3000262F35 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6B06A6501EB7AC3400170FF9 /* MapViewController.h */,
+				6B06A6511EB7AC3400170FF9 /* MapViewController.m */,
+				6B06A6711EB87AAB00170FF9 /* AddReminderViewController.h */,
+				6B06A6721EB87AAB00170FF9 /* AddReminderViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		6B1D2FE71EB9CD4900262F35 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				6B06A64D1EB7AC3400170FF9 /* AppDelegate.h */,
+				6B06A64E1EB7AC3400170FF9 /* AppDelegate.m */,
+				6B06A66B1EB7FA7300170FF9 /* Keys.h */,
+				6B06A66C1EB7FA7300170FF9 /* Keys.m */,
+				6B06A6741EB87B7E00170FF9 /* LocationCoordinates.h */,
+				6B06A6751EB87B7E00170FF9 /* LocationCoordinates.m */,
+				6B1D2FD61EB9107000262F35 /* LocationController.h */,
+				6B1D2FD71EB9107000262F35 /* LocationController.m */,
+				6B1D2FEB1EBA5AB800262F35 /* NotificationKeys.h */,
+				6B1D2FEC1EBA5AB800262F35 /* NotificationKeys.m */,
+			);
+			name = Others;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +268,9 @@
 				6B06A6731EB87AAB00170FF9 /* AddReminderViewController.m in Sources */,
 				6B06A6521EB7AC3400170FF9 /* MapViewController.m in Sources */,
 				6B06A66D1EB7FA7300170FF9 /* Keys.m in Sources */,
+				6B1D2FDB1EB976B400262F35 /* Reminder.m in Sources */,
+				6B1D2FD81EB9107000262F35 /* LocationController.m in Sources */,
+				6B1D2FED1EBA5AB800262F35 /* NotificationKeys.m in Sources */,
 				6B06A6791EB891A800170FF9 /* CustomAnnotationView.m in Sources */,
 				6B06A64F1EB7AC3400170FF9 /* AppDelegate.m in Sources */,
 				6B06A64C1EB7AC3400170FF9 /* main.m in Sources */,
@@ -345,6 +399,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = LocationReminders/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -361,6 +416,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = LocationReminders/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

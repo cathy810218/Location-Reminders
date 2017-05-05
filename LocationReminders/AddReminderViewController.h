@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
+typedef void(^AddReminderCompletion)(MKCircle *circle, NSString *name);
+
 @interface AddReminderViewController : UIViewController
 
 @property (strong, nonatomic) MKPointAnnotation *selectedAnnotation;
+@property (strong, nonatomic) AddReminderCompletion completion;
 
 @end
