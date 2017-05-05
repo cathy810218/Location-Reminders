@@ -22,6 +22,7 @@
 		6B06A6731EB87AAB00170FF9 /* AddReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A6721EB87AAB00170FF9 /* AddReminderViewController.m */; };
 		6B06A6761EB87B7E00170FF9 /* LocationCoordinates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A6751EB87B7E00170FF9 /* LocationCoordinates.m */; };
 		6B06A6791EB891A800170FF9 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B06A6781EB891A800170FF9 /* CustomAnnotationView.m */; };
+		6B1633DF1EBBF8D000AE7357 /* ReminderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1633DE1EBBF8D000AE7357 /* ReminderManager.m */; };
 		6B1D2FD81EB9107000262F35 /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1D2FD71EB9107000262F35 /* LocationController.m */; };
 		6B1D2FDB1EB976B400262F35 /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1D2FDA1EB976B400262F35 /* Reminder.m */; };
 		6B1D2FED1EBA5AB800262F35 /* NotificationKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1D2FEC1EBA5AB800262F35 /* NotificationKeys.m */; };
@@ -64,6 +65,8 @@
 		6B06A6751EB87B7E00170FF9 /* LocationCoordinates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationCoordinates.m; sourceTree = "<group>"; };
 		6B06A6771EB891A800170FF9 /* CustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
 		6B06A6781EB891A800170FF9 /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
+		6B1633DD1EBBF8D000AE7357 /* ReminderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderManager.h; sourceTree = "<group>"; };
+		6B1633DE1EBBF8D000AE7357 /* ReminderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderManager.m; sourceTree = "<group>"; };
 		6B1D2FD61EB9107000262F35 /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationController.h; sourceTree = "<group>"; };
 		6B1D2FD71EB9107000262F35 /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
 		6B1D2FD91EB976B400262F35 /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
@@ -182,6 +185,8 @@
 				6B1D2FD71EB9107000262F35 /* LocationController.m */,
 				6B1D2FEB1EBA5AB800262F35 /* NotificationKeys.h */,
 				6B1D2FEC1EBA5AB800262F35 /* NotificationKeys.m */,
+				6B1633DD1EBBF8D000AE7357 /* ReminderManager.h */,
+				6B1633DE1EBBF8D000AE7357 /* ReminderManager.m */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 				6B06A6731EB87AAB00170FF9 /* AddReminderViewController.m in Sources */,
 				6B06A6521EB7AC3400170FF9 /* MapViewController.m in Sources */,
 				6B06A66D1EB7FA7300170FF9 /* Keys.m in Sources */,
+				6B1633DF1EBBF8D000AE7357 /* ReminderManager.m in Sources */,
 				6B1D2FDB1EB976B400262F35 /* Reminder.m in Sources */,
 				6B1D2FD81EB9107000262F35 /* LocationController.m in Sources */,
 				6B1D2FED1EBA5AB800262F35 /* NotificationKeys.m in Sources */,

@@ -55,6 +55,15 @@
     [self.locationManager startMonitoringForRegion:region];
 }
 
+- (void)stopMonitoringForRegionWithIdentifier:(NSString *)identifier
+{
+    for (CLRegion *region in [self.locationManager monitoredRegions]) {
+        if ([region.identifier isEqualToString:identifier]) {
+            [self.locationManager stopMonitoringForRegion:region];
+        }
+    }
+}
+
 -(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
     NSLog(@"User did enter region: %@", region.identifier);

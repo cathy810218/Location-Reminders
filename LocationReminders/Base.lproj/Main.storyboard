@@ -85,7 +85,14 @@
                             <constraint firstItem="nkQ-AA-FNz" firstAttribute="centerX" secondItem="SxX-TY-D2d" secondAttribute="centerX" id="ygN-hF-ImX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Location Reminder" id="mqR-qV-BWr"/>
+                    <navigationItem key="navigationItem" title="Location Reminder" id="mqR-qV-BWr">
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="MMu-hc-yPN">
+                            <color key="tintColor" red="0.34827950499999999" green="0.36032320350000002" blue="0.36118051550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="removeAnnotationPressed:" destination="BYZ-38-t0r" id="K2r-IC-SI3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="currentLocationButton" destination="DiP-C0-M9W" id="HRa-2C-Esd"/>
                         <outlet property="mapView" destination="SxX-TY-D2d" id="yA1-q9-iDk"/>
@@ -132,7 +139,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dzL-IE-rmc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="applehq" translatesAutoresizingMaskIntoConstraints="NO" id="dzL-IE-rmc">
                                 <rect key="frame" x="36" y="92" width="303" height="303"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dzL-IE-rmc" secondAttribute="height" multiplier="1:1" id="UE8-oA-Y2M"/>
@@ -195,4 +202,7 @@
             <point key="canvasLocation" x="24.800000000000001" y="36.431784107946029"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="applehq" width="500" height="438"/>
+    </resources>
 </document>

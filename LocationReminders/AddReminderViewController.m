@@ -8,6 +8,7 @@
 
 #import "AddReminderViewController.h"
 #import "Reminder.h"
+#import "ReminderManager.h"
 #import "NotificationKeys.h"
 #import <ParseUI/ParseUI.h>
 #import "LocationController.h"
@@ -65,17 +66,13 @@ static const int kInitial_Radius = 250;
 {
     Reminder *newReminder = [Reminder object];
     newReminder.locationName = self.nameTextfield.text;
+    newReminder.radius = [NSNumber numberWithFloat:self.slider.value];
     newReminder.geoPoint = [PFGeoPoint geoPointWithLatitude:self.selectedAnnotation.coordinate.latitude longitude:self.selectedAnnotation.coordinate.longitude];
-    [newReminder saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        NSLog(@"%@",self.selectedAnnotation.title);
-        NSLog(@"%f %f",self.selectedAnnotation.coordinate.latitude, self.selectedAnnotation.coordinate.longitude);
-        if (succeeded) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kSavedReminderNotificationKey object:nil];
-            
+    [[ReminderManager shared] saveReminder:newReminder withCompletionHandler:^(BOOL succeed) {
+        if (succeed) {
             [self showAlertWithTitle:@"Succeed" andMessage:[NSString stringWithFormat:@"you have added \"\%@\" to your reminder list", self.nameTextfield.text]];
         } else {
             [self showAlertWithTitle:@"Error" andMessage:@"Something is wrong!"];
-            NSLog(@"%@", error.localizedDescription);
         }
     }];
     
@@ -100,6 +97,8 @@ static const int kInitial_Radius = 250;
     [addReminderAlert addAction:defaultAction];
     [self presentViewController:addReminderAlert animated:YES completion:nil];
 }
+
+
 
 - (IBAction)sliderAction:(id)sender {
     NSNumber *radius = [NSNumber numberWithInt:self.slider.value];

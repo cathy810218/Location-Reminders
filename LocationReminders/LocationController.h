@@ -23,5 +23,5 @@
 - (void)updateLocation;
 
 - (void)startMonitoringForRegion:(CLRegion *)region;
-
+- (void)stopMonitoringForRegionWithIdentifier:(NSString *)identifier;
 @end

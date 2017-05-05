@@ -12,7 +12,9 @@
 #import "LocationController.h"
 #import "NotificationKeys.h"
 #import <Parse/Parse.h>
+#import "ReminderManager.h"
 #import "Reminder.h"
+
 @import MapKit;
 
 @interface MapViewController () <MKMapViewDelegate, LocationControllerDelegate>
@@ -21,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *currentLocationButton;
 @property (strong, nonatomic) LocationController *locationController;
 @property (strong, nonatomic) MKPointAnnotation *annotationPin;
+@property (strong, nonatomic) MKAnnotationView *currentAnnotationView;
+@property (strong, nonatomic) NSMutableArray *allReminders;
 
 @end
 
@@ -31,23 +35,33 @@
     [super viewDidLoad];
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
+    [self showAllAnnotationWithOverlays];
+
     [LocationController shared].delegate = self;
     [[LocationController shared] updateLocation];
+    self.allReminders = [[NSMutableArray alloc] init];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:nil];
     
     UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     [self.mapView addGestureRecognizer:gesture];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reminderSavedToParse:) name:kSavedReminderNotificationKey object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reminderSavedToParse:) name:kUpdateReminderNotificationKey object:nil];
 }
 
 - (void)reminderSavedToParse:(id)sender
 {
-    PFQuery *query = [Reminder query];
-    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        Reminder *object = [objects lastObject];
-        self.annotationPin.title = object.locationName;
-        
+    [self showAllAnnotationWithOverlays];
+}
+
+- (void)showAllAnnotationWithOverlays
+{
+    [self.mapView removeOverlays:self.mapView.overlays];
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    [[ReminderManager shared] fetchAllRemindersWithCompletionHandler:^(NSArray<Reminder *> *reminders) {
+        for (Reminder *reminder in reminders) {
+            [self dropPinForReminder:reminder];
+        }
+        self.allReminders = [reminders mutableCopy];
     }];
 }
 
@@ -64,17 +78,17 @@
     }
 }
 
-- (void)redrawAllPins
+- (void)dropPinForReminder:(Reminder *)reminder
 {
-    PFQuery *query = [Reminder query];
-    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        for (Reminder *reminder in objects) {
-            MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
-            
-            
-        }
-        
-    }];
+    MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
+    
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(reminder.geoPoint.latitude, reminder.geoPoint.longitude);
+    MKCircle *circle = [MKCircle circleWithCenterCoordinate:coordinate radius:[reminder.radius intValue]];
+    circle.title = reminder.locationName;
+    pointAnnotation.coordinate = coordinate;
+    pointAnnotation.title = reminder.locationName;
+    [self.mapView addAnnotation:pointAnnotation];
+    [self.mapView addOverlay:circle];
 }
 
 - (void)dropPinWithCoordinate:(CLLocationCoordinate2D)coordinate
@@ -112,14 +126,15 @@
         addReminderVC.selectedAnnotation  = view.annotation;
         __weak __typeof__(self) weakSelf = self;
         addReminderVC.completion = ^(MKCircle *circle, NSString *name) {
-            [weakSelf.mapView addOverlay:circle];
+            __strong __typeof__(weakSelf) fakeStrong = weakSelf;
+            [fakeStrong.mapView addOverlay:circle];
         };
     }
 }
 
 -(void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kSavedReminderNotificationKey object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kUpdateReminderNotificationKey object:nil];
 }
 
 #pragma mark - UISegmentedControl
@@ -162,6 +177,16 @@
 
 }
 
+- (IBAction)removeAnnotationPressed:(id)sender {
+    for (Reminder *reminder in self.allReminders) {
+        if ([reminder.locationName isEqualToString: self.currentAnnotationView.annotation.title]) {
+            [[ReminderManager shared] removeReminder:reminder];
+            [self showAllAnnotationWithOverlays];
+            return;
+        }
+    }
+}
+
 #pragma mark - LocationControllerDelegate
 -(void)locationControllerUpdatedLocation:(CLLocation *)location
 {
@@ -194,6 +219,10 @@
     [self performSegueWithIdentifier:@"AddReminderViewController" sender:view];
 }
 
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+    self.currentAnnotationView = view;
+}
 
 -(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
 {
